@@ -1,25 +1,26 @@
 package com.example.demo.producer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Employee;
-
-// import org.springframework.cloud.stream.annotation.SendTo;
 
 @Service
 @EnableBinding(Source.class)
 public class EmployeeProducer {
 
-    @Autowired
-    private Source source;
-
-    // @SendTo("demo.input")
-
-    public void sendEmployee(Employee employee) {
-        // source.output().send(MessageBuilder.withPayload(employee).build());
-        System.out.println("Sent employee: " + employee);
+    @SendTo("employee-topic")
+    public Employee sendEmployee(Employee employee) {
+        if (employee == null) {
+            System.out.println("Employee is null");
+            return null;
+        } else {
+            // employee.setId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
+            System.out.println("Sent employee: " + employee);
+            return employee;
+        }
     }
+
 }
