@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Employee;
@@ -14,7 +13,6 @@ import jakarta.transaction.Transactional;
 
 @Service
 @EnableBinding(Sink.class)
-@DependsOn("employeeProducer")
 public class EmployeeConsumer {
 
     @Autowired

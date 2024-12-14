@@ -26,11 +26,9 @@ public class Employee {
 	@JsonProperty("email")
 	private String email;
 	
-	// for JPA only, no use
-	public Employee() {
-	}
+	public Employee() {}
 
-	// getters, setters and constructor
+	// constructor
 
 	public Employee(String name, String email) {
 		this.name = name;
@@ -43,6 +41,8 @@ public class Employee {
 		this.email = email;
 	}
 
+	// getters
+
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +54,8 @@ public class Employee {
 	public String getName() {
 		return name;
 	}
+
+	// setters
 
 	public void setName(String name) {
 		this.name = name;

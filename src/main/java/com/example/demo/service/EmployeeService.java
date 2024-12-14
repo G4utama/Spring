@@ -16,12 +16,6 @@ public class EmployeeService {
     @Autowired
     private MyRepository myRepository;
 
-    // @Autowired
-    // private EmployeeProducer employeeProducer;
-
-    // @Autowired
-    // private EmployeeConsumer employeeConsumer;
-
     @Query("SELECT e FROM employee e")
     public List<Employee> findAll() {
         return myRepository.findAll();
@@ -31,6 +25,7 @@ public class EmployeeService {
         return myRepository.findById(id);
     }
 
+    // insert a employee in the repo
     @Query("INSERT INTO employee (name, email) VALUES (:name, :email)")
     public Employee save(Employee employee) {
         return myRepository.save(employee);
@@ -45,13 +40,5 @@ public class EmployeeService {
     public void deleteById(Long id) {
         myRepository.deleteById(id);
     }
-
-    // public void sendEmployeeData(Employee employee) {
-    //     employeeProducer.sendEmployee(employee);
-    // }
-
-    // public void receiveEmployeeData(Employee employee) {
-    //     employeeConsumer.receiveEmployee(employee);
-    // }
 
 }

@@ -17,7 +17,6 @@ public class EmployeeProducer {
             System.out.println("Employee is null");
             return null;
         } else {
-            // employee.setId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
             System.out.println("Sent employee: " + employee);
             return employee;
         }

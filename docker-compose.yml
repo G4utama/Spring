@@ -3,13 +3,17 @@ services:
   zookeeper:
     image: wurstmeister/zookeeper:latest
     container_name: zookeeper
+    restart: unless-stopped
     ports:
       - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
     networks:
       - kafka-net
   kafka:
     image: wurstmeister/kafka:latest
     container_name: kafka
+    restart: unless-stopped
     depends_on:
       - zookeeper
     ports:
@@ -25,7 +29,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
-      KAFKA_CREATE_TOPICS: "employee_topic:1:1"
+      KAFKA_CREATE_TOPICS: "employee-topic:1:1"
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     volumes:
       - kafka-data-volume:/var/lib/kafka/data
@@ -34,6 +38,7 @@ services:
   postgres:
     image: postgres:latest
     container_name: postgres
+    restart: unless-stopped
     ports:
       - "5432:5432"
     environment:

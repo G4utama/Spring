@@ -13,7 +13,7 @@ import com.example.demo.producer.EmployeeProducer;
 import com.example.demo.repository.MyRepository;
 
 @SpringBootApplication
-@EnableBinding({ EmployeeConsumer.class, EmployeeProducer.class })
+@EnableBinding({ EmployeeProducer.class, EmployeeConsumer.class })
 public class MainApplication {
 
     @Autowired
@@ -22,24 +22,33 @@ public class MainApplication {
     @Autowired
     EmployeeProducer employeeProducer;
 
+    @Autowired
+    EmployeeConsumer employeeConsumer;
+
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class, args);
     }
 
     @Bean
     public CommandLineRunner demoCommandLineRunner() {
+
         return args -> {
 
-            Employee employee = new Employee("John Doe", "john.doe@example.com");
-            employeeProducer.sendEmployee(employee);
+            // example
 
-            System.out.println("Waiting...");
-            Thread.sleep(3000);
+            System.out.println("Employee count: " + myRepository.count());
+            System.out.println("Wait...");
+            Thread.sleep(2000);
+
+            Employee employee = new Employee("Mario Rossi", "mario.rossi@example.com");
+            employeeProducer.sendEmployee(employee);
+            employeeConsumer.receiveEmployee(employee);
 
             System.out.println("Employee count: " + myRepository.count());
             myRepository.findAll().forEach(System.out::println);
 
         };
+        
     }
 
 }

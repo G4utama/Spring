@@ -37,7 +37,7 @@ public class EmployeeController {
     }
 
     // create a employee
-    @ResponseStatus(HttpStatus.CREATED) // 201
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Employee create(@RequestBody Employee employee) {
         return employeeService.save(employee);
@@ -50,7 +50,7 @@ public class EmployeeController {
     }
 
     // delete a employee
-    @ResponseStatus(HttpStatus.NO_CONTENT) // 204
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         employeeService.deleteById(id);
